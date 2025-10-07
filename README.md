@@ -1,2 +1,3 @@
 # Learning_2
-This repo is use to preform and execute and practice git commands 
+This is a simple chat application for the learning purpose i have done.
+
