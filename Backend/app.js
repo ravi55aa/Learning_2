@@ -42,12 +42,12 @@ io.on("connection", (socket) => {
 });
 
 dbConnect();
-
-//routers
-app.use("/auth", loginUserRouter);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+//routers
+app.use("/auth", loginUserRouter);
 
 app.get("/api/test", (req, res) => {
     res.json({ message: "Backend connected successfully!" });
