@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "build-frontend": "npm install --prefix ../frontend && npm run build --prefix ../frontend"
+    "build-frontend": "npm install --prefix ../FrontEnd && npm run build --prefix ../FrontEnd"
   },
   "author": "",
   "license": "ISC",
