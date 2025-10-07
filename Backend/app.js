@@ -16,10 +16,6 @@ import dbConnect from "./DB/dbConnect.js";
 import loginUserRouter from "./Router/Login/login.router.js";
 import { handleError } from "./Middlewares/errorHandle.middleware.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -49,6 +45,10 @@ dbConnect();
 
 //routers
 app.use("/auth", loginUserRouter);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
 app.get("/api/test", (req, res) => {
     res.json({ message: "Backend connected successfully!" });
 });
