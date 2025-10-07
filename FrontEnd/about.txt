@@ -1,0 +1,183 @@
+Frontend
+src/
+ ├── components/
+ │    ├── ChatWindow.tsx
+ │    ├── Sidebar.tsx
+ │    ├── Message.tsx
+ │    └── InputBox.tsx
+ ├── pages/
+ │    ├── Login.tsx
+ │    ├── Register.tsx
+ │    └── Chat.tsx
+ ├── context/
+ │    └── AuthContext.tsx
+ ├── services/
+ │    └── api.ts (Axios instance)
+ ├── App.tsx
+ └── main.tsx
+
+
+Backend
+server/
+ ├── models/
+ │    ├── User.js
+ │    └── Message.js
+ ├── routes/
+ │    ├── authRoutes.js
+ │    └── messageRoutes.js
+ ├── controllers/
+ │    ├── authController.js
+ │    └── messageController.js
+ ├── socket/
+ │    └── socket.js
+ ├── app.js
+ └── server.js
+
+
+
+## 🛠️ **Tech Stack**
+
+Frontend (client): React + TypeScript + TailwindCSS (for UI)
+Backend (server): Node.js + Express
+ Database: MongoDB (user info, chat messages, chat rooms)
+ Real-time communication: Socket.IO (WebSockets)
+ Authentication: JWT or OAuth (Google/Facebook sign-in optional)
+ Deployment: Vercel/Netlify for frontend, Render/Heroku for backend, MongoDB Atlas for database
+
+---
+
+## 📝 **Key Features**
+
+1. **Authentication**
+
+   * Sign up / Login (email-password)
+   * Optionally Google/Facebook login
+2. **Real-time messaging**
+
+   * One-to-one chat
+   * Group chat / chat rooms
+   * “Typing…” indicator
+   * Online/offline status
+3. **File sharing**
+
+   * Images, docs, emojis, gifs
+4. **Message persistence**
+
+   * Messages stored in MongoDB, displayed when users reconnect
+5. **Notifications**
+
+   * New message alerts
+   * Push notifications (optional)
+6. **Profile management**
+
+   * Avatar upload
+   * Status/bio
+7. **Security**
+
+   * JWT token for auth
+   * Encrypt passwords with bcrypt
+
+---
+
+## 🗂️ **Project Structure**
+
+### **Frontend (React + TS)**
+
+```
+src/
+ ├── components/
+ │    ├── ChatWindow.tsx
+ │    ├── Sidebar.tsx
+ │    ├── Message.tsx
+ │    └── InputBox.tsx
+ ├── pages/
+ │    ├── Login.tsx
+ │    ├── Register.tsx
+ │    └── Chat.tsx
+ ├── context/
+ │    └── AuthContext.tsx
+ ├── services/
+ │    └── api.ts (Axios instance)
+ ├── App.tsx
+ └── main.tsx
+```
+
+### **Backend (Node + Express)**
+
+```
+server/
+ ├── models/
+ │    ├── User.js
+ │    └── Message.js
+ ├── routes/
+ │    ├── authRoutes.js
+ │    └── messageRoutes.js
+ ├── controllers/
+ │    ├── authController.js
+ │    └── messageController.js
+ ├── socket/
+ │    └── socket.js
+ ├── app.js
+ └── server.js
+```
+
+---
+
+## 🧑‍💻 **Implementation Steps**
+
+### 1️⃣ **Backend**
+
+* `npm init` and install:
+  `npm install express mongoose bcrypt jsonwebtoken socket.io cors`
+* Connect MongoDB with Mongoose.
+* Create **User** model (name, email, hashed password, avatar).
+* Create **Message** model (sender, receiver/groupId, content, timestamp).
+* Build auth routes:
+
+  * `/api/auth/register`
+  * `/api/auth/login`
+* Build message routes:
+
+  * `/api/messages/:chatId` → GET (fetch messages)
+  * `/api/messages` → POST (send new message)
+* Configure **Socket.IO**:
+
+  * Events: `connection`, `joinRoom`, `sendMessage`, `receiveMessage`, `typing`, `disconnect`
+
+### 2️⃣ **Frontend**
+
+* Create login/register pages with forms.
+* After login, store JWT in localStorage or HttpOnly cookie.
+* Connect to **Socket.IO** server using `socket.io-client`.
+* Manage auth & user context with React Context API.
+* Build the chat UI:
+
+  * Sidebar (list of chats/contacts)
+  * ChatWindow (messages)
+  * InputBox (send message)
+
+### 3️⃣ **Real-time Messaging**
+
+* When user selects a chat:
+
+  * Join a room on Socket.IO.
+  * Emit `sendMessage` when sending a message.
+  * Listen for `receiveMessage` and update state instantly.
+
+### 4️⃣ **Optional Enhancements**
+
+* Add **group chats** (room model in DB).
+* Add **read receipts**.
+* Add **push notifications**.
+* Deploy frontend and backend separately.
+
+---
+
+## ⚡ **MVP Roadmap**
+
+1. **Day 1–2**: Backend auth & models (User, Message).
+2. **Day 3–4**: Frontend auth pages + basic chat UI.
+3. **Day 5**: Integrate Socket.IO for real-time messaging.
+4. **Day 6**: Store/retrieve messages from MongoDB.
+5. **Day 7**: Add extra features (avatars, typing indicator).
+
